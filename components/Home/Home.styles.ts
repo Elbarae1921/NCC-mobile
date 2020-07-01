@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     },
     panel: {
         borderBottomColor: "white",
-        borderBottomWidth: 2,
         height: Dimensions.get("window").height / 2,
         width: "100%"
     },

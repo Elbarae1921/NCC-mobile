@@ -24,6 +24,9 @@
     },
     "packagerOpts": {
         "sourceExts": ["ts","tsx","js"]
+    },
+    "android": {
+        "softwareKeyboardLayoutMode": "pan"
     }
   }
 }
