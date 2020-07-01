@@ -1,10 +1,7 @@
 import React from 'react';
 import { TextInput, StyleSheet, TextInputProps } from 'react-native';
 
-interface InputProps extends TextInputProps{
-}
-
-const Input: React.FC<InputProps> = ({ placeholder, onChangeText, textContentType }) => {
+const Input: React.FC<TextInputProps> = ({ placeholder, onChangeText, textContentType }) => {
     return (
         <TextInput placeholder={placeholder} textContentType={textContentType} onChangeText={onChangeText} style={styles.input} />
     )
