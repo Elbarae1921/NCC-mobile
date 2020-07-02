@@ -32,22 +32,21 @@ const Checkin: React.FC<CheckinProps> = ({ navigation }) => {
                 <View style={styles.intermediate}>
                     <Header goBack={Prev} />
                     <View style={styles.boxcontainer}>
-                        <View style={styles.box}>
+                        <View style={styles.box}>                            
                             <Text style={styles.title}>Please enter your information</Text>
-                            <View style={styles.inputcontainer}>
-                                <Input placeholder="Family Name..." onChangeText={() => {}} />
+                            <View style={styles.subcontainer}>
+                                <View style={styles.inputcontainer}>
+                                    <Input placeholder="Family Name..." onChangeText={() => {}} textContentType="familyName"/>
+                                </View>
+                                <View style={styles.inputcontainer}>
+                                    <Input placeholder="First Name..." onChangeText={() => {}} textContentType="givenName" />
+                                </View>
+                                <View style={styles.inputcontainer}>
+                                    <Input placeholder="City..." onChangeText={() => {}} textContentType="addressCity" />
+                                </View>
                             </View>
                             <View style={styles.inputcontainer}>
-                                <Input placeholder="First Name..." onChangeText={() => {}} />
-                            </View>
-                            <View style={styles.inputcontainer}>
-                                <Input placeholder="City..." onChangeText={() => {}} />
-                            </View>
-                            <View style={styles.inputcontainer}>
-                                <Button text="Add Family Member" onPress={() => {}} />
-                            </View>
-                            <View style={styles.inputcontainer}>
-                            <Button text="Submit" onPress={() => {}} />
+                                <Button text="Submit" onPress={() => {}} />
                             </View>
                         </View>
                     </View>

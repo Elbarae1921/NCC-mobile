@@ -5,6 +5,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from './components/Home/Home';
 import Checkin from './components/Checkin/Checkin';
+import Find from './components/Find/Find';
+import FindResults from './components/FindResults/FindResults';
+import Partner from './components/Partner/Partner';
+
+import RootStackParamList from './types/RootStackParamList';
 
 const App: React.FC = () => {
     
@@ -14,7 +19,7 @@ const App: React.FC = () => {
     }, []);
 
 
-    const { Navigator, Screen } = createStackNavigator();
+    const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
     
     return (
@@ -22,8 +27,11 @@ const App: React.FC = () => {
             <StatusBar />
             <NavigationContainer>
                 <Navigator initialRouteName="home" screenOptions={{ headerShown: false }} >
-                    <Screen options={{gestureDirection:"horizontal"}} name="home" component={Home} />
+                    <Screen name="home" component={Home} />
                     <Screen name="checkin" component={Checkin} />
+                    <Screen name="find" component={Find} />
+                    <Screen name="findresults" component={FindResults} />
+                    <Screen name="partner" component={Partner} />
                 </Navigator>
             </NavigationContainer>
         </View>

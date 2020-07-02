@@ -1,12 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    img: {
-        flex: 1,
-        resizeMode: "center",
-        width: "100%",
-        height: "100%"
-
+    background: {
+        flex: 1
     },
     intermediate: {
         flex: 1,
@@ -32,7 +28,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        width: "100%"
     },
     subcontainer: {
         marginBottom: 40

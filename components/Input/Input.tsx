@@ -1,9 +1,13 @@
 import React from 'react';
 import { TextInput, StyleSheet, TextInputProps } from 'react-native';
 
-const Input: React.FC<TextInputProps> = ({ placeholder, onChangeText, textContentType }) => {
+interface InputProps extends TextInputProps {
+    width?: number | string;
+}
+
+const Input: React.FC<InputProps> = ({ placeholder, onChangeText, textContentType, width="100%" }) => {
     return (
-        <TextInput placeholder={placeholder} textContentType={textContentType} onChangeText={onChangeText} style={styles.input} />
+        <TextInput placeholder={placeholder} textContentType={textContentType} onChangeText={onChangeText} style={{...styles.input, width}} />
     )
 }
 
@@ -13,7 +17,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "white",
         padding: 5,
-        width: "100%",
         minWidth: 170
     }
 });
