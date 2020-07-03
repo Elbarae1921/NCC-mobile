@@ -6,6 +6,7 @@ type RootStackParamList = {
     find: undefined;
     partner: undefined;
     findresults: Person[];
+    checkinconfirmation: Person;
 }
 
 export default RootStackParamList;
