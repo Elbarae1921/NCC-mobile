@@ -1,28 +1,36 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, GestureResponderEvent } from 'react-native';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 
 import styles from './Partner.styles';
 
-const Register: React.FC = () => {
+interface RegisterProps {
+    onChangeEmail: (text: string) => void;
+    onChangeOrganization: (text: string) => void;
+    onChangePhoneNumber: (text: string) => void;
+    onChangePassword: (text: string) => void;
+    onSubmit: (event: GestureResponderEvent) => void;
+}
+
+const Register: React.FC<RegisterProps> = ({ onChangeEmail, onChangeOrganization, onChangePhoneNumber, onChangePassword, onSubmit}) => {
     return (
         <View style={styles.formbox}>
             <View style={styles.forminputcontainer}>
-                <Input placeholder="email..." textContentType="emailAddress" onChangeText={() => {}} />
+                <Input placeholder="email..." textContentType="emailAddress" onChangeText={onChangeEmail} />
             </View>
             <View style={styles.forminputcontainer}>
-                <Input placeholder="Organization..." textContentType="organizationName" onChangeText={() => {}} />
+                <Input placeholder="Organization..." textContentType="organizationName" onChangeText={onChangeOrganization} />
             </View>
             <View style={styles.forminputcontainer}>
-                <Input placeholder="Phone number..." textContentType="telephoneNumber" onChangeText={() => {}} />
+                <Input placeholder="Phone number..." textContentType="telephoneNumber" onChangeText={onChangePhoneNumber} />
             </View>
             <View style={styles.forminputcontainer}>
-                <Input placeholder="password..." textContentType="password" onChangeText={() => {}} />
+                <Input placeholder="password..." textContentType="password" onChangeText={onChangePassword} secureTextEntry={true} />
             </View>
             <View style={styles.forminputcontainer}>
-                <Button text="Register" onPress={() => {}} />
+                <Button text="Register" onPress={onSubmit} />
             </View>
         </View>
     )

@@ -5,9 +5,9 @@ interface InputProps extends TextInputProps {
     width?: number | string;
 }
 
-const Input: React.FC<InputProps> = ({ placeholder, onChangeText, textContentType, width="100%" }) => {
+const Input: React.FC<InputProps> = ({ placeholder, onChangeText, textContentType, width="100%", secureTextEntry }) => {
     return (
-        <TextInput placeholder={placeholder} textContentType={textContentType} onChangeText={onChangeText} style={{...styles.input, width}} />
+        <TextInput secureTextEntry={secureTextEntry} placeholder={placeholder} textContentType={textContentType} onChangeText={onChangeText} style={{...styles.input, width}} />
     )
 }
 

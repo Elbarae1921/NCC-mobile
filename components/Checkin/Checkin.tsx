@@ -9,8 +9,10 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 
 import RootStackParamList from '../../types/RootStackParamList';
+import { checkin } from '../../API';
 
 import styles from './Checkin.styles';
+import { Person } from '../../types/PersonType';
 
 interface CheckinProps {
     navigation: StackNavigationProp<RootStackParamList, "checkin">;
@@ -18,42 +20,42 @@ interface CheckinProps {
 
 const Checkin: React.FC<CheckinProps> = ({ navigation }) => {
 
-    const [spin, setSpin] = useState(false);
-
     let [fontsloaded] = useFonts({
         RobotoMono_700Bold
     });
 
-    const timeout = (ms: number): Promise<any> => {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    const [spin, setSpin] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [familyName, setFamilyName] = useState("");
+    const [city, setCity] = useState("");
+    const [error, setError] = useState("");
+
+    const updateFirstName = (text: string): void => {
+        setFirstName(text);
     }
 
-    const submit = async() => {
+    const updateFamilyName = (text: string): void => {
+        setFamilyName(text);
+    }
+
+    const updateCity = (text: string): void => {
+        setCity(text);
+    }
+
+    const submit = async () => {
+        setError("");
+
+        if(firstName.length < 2 || familyName.length < 2 || city.length < 2)
+            return setError("Please fill all the fields.");
+
         setSpin(true);
-        await timeout(1000);
+        const response = await checkin(firstName, familyName, city);
         setSpin(false);
-        navigation.navigate("checkinconfirmation", 
-        {
-                name: "DOE John",
-                available: {
-                    firstName: "John",
-                    familyName: "Doe",
-                    city: "Boston",
-                    fromOrg: true,
-                    org: "FEMA",
-                    status: "safe",
-                    familyMembers: []
-                },
-                location: {
-                    city: "Agadir",
-                    country: "MA",
-                    ip: "13.56.310.35",
-                    latitude: "30.213",
-                    longitude: "7.467",
-                    region: "06",
-                    timezone: "Africa/Casablance"
-                }
-        });
+
+        if(typeof response === "string")
+            return setError(response);
+
+        return navigation.navigate("checkinconfirmation", response as Person);
     }
 
     if(!fontsloaded)
@@ -68,13 +70,13 @@ const Checkin: React.FC<CheckinProps> = ({ navigation }) => {
                             <Text style={styles.title}>Please enter your information</Text>
                             <View style={styles.subcontainer}>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="Family Name..." onChangeText={() => {}} textContentType="familyName"/>
+                                    <Input placeholder="Family Name..." onChangeText={updateFamilyName} textContentType="familyName"/>
                                 </View>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="First Name..." onChangeText={() => {}} textContentType="givenName" />
+                                    <Input placeholder="First Name..." onChangeText={updateFirstName} textContentType="givenName" />
                                 </View>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="City..." onChangeText={() => {}} textContentType="addressCity" />
+                                    <Input placeholder="City..." onChangeText={updateCity} textContentType="addressCity" />
                                 </View>
                             </View>
                             <View style={styles.inputcontainer}>
@@ -83,6 +85,7 @@ const Checkin: React.FC<CheckinProps> = ({ navigation }) => {
                             <View style={{...styles.inputcontainer, display: spin ? "flex" : "none"}}>
                                 <ActivityIndicator color="#fff" />
                             </View>
+                            <Text style={styles.error}>{error}</Text>
                         </View>
                     </View>
                 </View>

@@ -1,5 +1,5 @@
 export type Person = {
-    name: string;
+    name?: string;
     available: AvailableInfo;
     location: LocationInfo;
 }

@@ -86,6 +86,17 @@ const styles = StyleSheet.create({
         width: "95%",
         alignItems: "center",
         padding: 15
+    },
+    error: {
+        color: "red",
+        textAlign: "center",
+        fontSize: 10,
+        fontFamily: "RobotoMono_400Regular"
+    },
+    key: {
+        color: "green",
+        textAlign: "center",
+        fontSize: 11
     }
 });
 

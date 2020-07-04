@@ -11,6 +11,8 @@ import Button from '../Button/Button';
 import styles from './Find.styles';
 
 import RootStackParamList from '../../types/RootStackParamList';
+import { Person } from '../../types/PersonType';
+import { find } from '../../API';
 
 interface FindProps {
     navigation: StackNavigationProp<RootStackParamList, 'find'>;
@@ -23,38 +25,37 @@ const Find: React.FC<FindProps> = ({ navigation }) => {
     });
 
     const [spin, setSpin] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [familyName, setFamilyName] = useState("");
+    const [city, setCity] = useState("");
+    const [error, setError] = useState("");
 
-    const timeout = (ms: number): Promise<any> => {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    const updateFirstName = (text: string): void => {
+        setFirstName(text);
     }
 
-    const search = async() => {
+    const updateFamilyName = (text: string): void => {
+        setFamilyName(text);
+    }
+
+    const updateCity = (text: string): void => {
+        setCity(text);
+    }
+
+    const search = async () => {
+        setError("");
+
+        if(firstName.length < 2 && familyName.length < 2 && city.length < 2)
+            return setError("Please fill at least one field.");
+
         setSpin(true);
-        await timeout(1000);
+        const response = await find(firstName, familyName, city);
         setSpin(false);
-        navigation.navigate("findresults", [
-            {
-                name: "DOE John",
-                available: {
-                    firstName: "John",
-                    familyName: "Doe",
-                    city: "Boston",
-                    fromOrg: true,
-                    org: "FEMA",
-                    status: "safe",
-                    familyMembers: []
-                },
-                location: {
-                    city: "Agadir",
-                    country: "MA",
-                    ip: "13.56.310.35",
-                    latitude: "30.213",
-                    longitude: "7.467",
-                    region: "06",
-                    timezone: "Africa/Casablance"
-                }
-            }
-        ]);
+
+        if(typeof response === "string")
+            return setError(response);
+
+        return navigation.navigate("findresults", response as Person[]);
     }
 
     if(!fontsloaded)
@@ -69,13 +70,13 @@ const Find: React.FC<FindProps> = ({ navigation }) => {
                             <Text style={styles.title}>Who are you looking for?</Text>
                             <View style={styles.subcontainer}>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="Family Name..." onChangeText={() => {}} textContentType="familyName"/>
+                                    <Input placeholder="Family Name..." onChangeText={updateFamilyName} textContentType="familyName"/>
                                 </View>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="First Name..." onChangeText={() => {}} textContentType="givenName" />
+                                    <Input placeholder="First Name..." onChangeText={updateFirstName} textContentType="givenName" />
                                 </View>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="City..." onChangeText={() => {}} textContentType="addressCity" />
+                                    <Input placeholder="City..." onChangeText={updateCity} textContentType="addressCity" />
                                 </View>
                             </View>
                             <View style={styles.inputcontainer}>
@@ -84,6 +85,7 @@ const Find: React.FC<FindProps> = ({ navigation }) => {
                             <View style={{...styles.inputcontainer, display: spin ? "flex" : "none"}}>
                                 <ActivityIndicator animating={true} color="#fff" size="small" />
                             </View>
+                            <Text style={styles.error}>{error}</Text>
                         </View>
                     </View>
                 </View>

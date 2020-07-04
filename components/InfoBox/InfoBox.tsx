@@ -29,7 +29,7 @@ const InfoBox: React.FC<InfoBoxProps> = ({ data, width="100%" }) => {
             </View>
             <View style={styles.infosep}>
                 <Text style={styles.lef}>Organization : </Text>
-                <Text style={styles.rig}>{data.org}</Text>
+                <Text style={styles.rig}>{data.org || "N/A"}</Text>
             </View>
         </View>
     )

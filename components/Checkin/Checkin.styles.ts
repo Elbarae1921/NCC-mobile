@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
     },
     subcontainer: {
         marginBottom: 40
+    },
+    error: {
+        color: "red",
+        textAlign: "center",
+        fontSize: 10
     }
 });
 

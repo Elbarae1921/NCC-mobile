@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, View, Text } from 'react-native';
+import { ImageBackground, View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useFonts, RobotoMono_700Bold, RobotoMono_400Regular} from '@expo-google-fonts/roboto-mono';
 import { AppLoading } from 'expo';
@@ -9,12 +9,13 @@ import Button from '../Button/Button';
 import Login from './Login';
 import Register from './Register';
 
+import { partnerLogin, partnerRegister } from '../../API';
+
+import styles from './Partner.styles';
+
 interface PartnerProps {
     navigation: StackNavigationProp<any>;
 }
-
-import styles from './Partner.styles';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const Partner: React.FC<PartnerProps> = ({ navigation }) => {
 
@@ -24,12 +25,76 @@ const Partner: React.FC<PartnerProps> = ({ navigation }) => {
     });
     
     const [login, setLogin] = useState(true);
+    const [spin, setSpin] = useState(false);
+    const [error, setError] = useState("");
+    const [token, setToken] = useState("");
+    const [email, setEmail] = useState("");
+    const [organization, setOrganization] = useState("");
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
 
     const switchForm = () => {
         setLogin(oldState => !oldState);
     }
 
-    let form = login ? <Login /> : <Register />;
+    const updateEmail = (text: string) => {
+        setEmail(text);
+    }
+
+    const updateOrganization = (text: string) => {
+        setOrganization(text);
+    }
+
+    const updatePhone = (text: string) => {
+        setPhone(text);
+    }
+
+    const updatePassword = (text: string) => {
+        setPassword(text);
+    }
+
+    const displayMessage = (key: string) => {
+        setToken(`Here is your key : ${key}.\nPlease make sure to keep it safe and secret.`);
+    }
+
+    const performLogin = async () => {
+        setError("");
+        setToken("");
+
+        if(!email || !password)
+            return setError("Please fill all fields.");
+
+        setSpin(true);
+        const response = await partnerLogin(email, password);
+        setSpin(false);
+
+        if(!response.isSuccessful)
+            return setError(response.tokenOrError);
+        
+        return displayMessage(response.tokenOrError);
+    }
+
+    const performRegister = async () => {
+        setError("");
+        setToken("");
+
+        if(!email || !password || !organization || !phone)
+            return setError("Please fill all fields.");
+
+        setSpin(true);
+        const response = await partnerRegister(email, organization, phone, password);
+        setSpin(false);
+        
+        if(!response.isSuccessful)
+            return setError(response.tokenOrError);
+        
+        return displayMessage(response.tokenOrError);
+    }
+
+    let form = login ? 
+                <Login onChangeEmail={updateEmail} onChangePassword={updatePassword} onSubmit={performLogin} /> 
+                : 
+                <Register onChangeEmail={updateEmail} onChangeOrganization={updateOrganization} onChangePhoneNumber={updatePhone} onChangePassword={updatePassword} onSubmit={performRegister} />;
 
     if(!fontsloaded)
         return <AppLoading />
@@ -76,6 +141,11 @@ const Partner: React.FC<PartnerProps> = ({ navigation }) => {
                                     <Text style={styles.title}>Get a key</Text>
                                 </View>
                                 {form}
+                                <View style={{...styles.sep, display: spin ? "flex" : "none"}}>
+                                    <ActivityIndicator animating={true} color="#fff" size="small" />
+                                </View>
+                                <Text style={styles.error}>{error}</Text>
+                                <Text style={styles.key}>{token}</Text>
                                 <View style={styles.sep}>
                                     <Button text="Switch to registration" onPress={switchForm} />
                                 </View>
