@@ -1,32 +1,40 @@
 {
-  "expo": {
-    "name": "NCC - National Catastrophe Center",
-    "slug": "NCC",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "packagerOpts": {
-        "sourceExts": ["ts","tsx","js"]
-    },
-    "android": {
-        "softwareKeyboardLayoutMode": "pan"
+    "expo": {
+        "name": "NCC - National Catastrophe Center",
+        "slug": "NCC",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "updates": {
+            "fallbackToCacheTimeout": 0
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "bundleIdentifier": "com.h3o.ncc",
+            "buildNumber": "1.0.0",
+            "supportsTablet": true
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "packagerOpts": {
+            "sourceExts": [
+                "ts",
+                "tsx",
+                "js"
+            ]
+        },
+        "android": {
+            "package": "com.h3o.ncc",
+            "versionCode": 1,
+            "softwareKeyboardLayoutMode": "pan"
+        }
     }
-  }
 }
