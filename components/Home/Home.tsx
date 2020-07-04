@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
     });
 
 
-    const panels = [{to: "checkin", uri: require("../../assets/checkin.jpg"), title: "CHECKIN"},{to: "find", uri: require("../../assets/find.jpg"), title: "FIND SOMEONE"},{to: "weather", uri: require("../../assets/weather.jpg"), title: "WEATHER"},{to: "partner", uri: require("../../assets/partner.jpg"), title: "PARTNER UP"}]
+    const panels = [{to: "checkin", uri: require("../../assets/backgrounds/checkin.jpg"), title: "CHECKIN"},{to: "find", uri: require("../../assets/backgrounds/find.jpg"), title: "FIND SOMEONE"},{to: "weather", uri: require("../../assets/backgrounds/weather.jpg"), title: "WEATHER"},{to: "partner", uri: require("../../assets/backgrounds/partner.jpg"), title: "PARTNER UP"}]
 
 
     if(!fontsloaded) {

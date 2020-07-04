@@ -31,7 +31,7 @@ const CheckinConfirmation: React.FC<CheckinConfirmationProps> = ({ navigation, r
         return <AppLoading />
     else
         return (
-            <ImageBackground source={require("../../assets/checkin.jpg")} style={styles.background}>
+            <ImageBackground source={require("../../assets/backgrounds/checkin.jpg")} style={styles.background}>
                 <View style={styles.intermediate}>
                     <Header goBack={() => navigation.goBack()} />
                     <View style={styles.boxcontainer}>

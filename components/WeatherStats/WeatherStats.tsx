@@ -28,7 +28,7 @@ const Checkin: React.FC<CheckinProps> = ({ navigation, route: { params: {weather
         return <AppLoading />
     else
         return (
-            <ImageBackground source={require("../../assets/weather.jpg")} style={styles.img}>
+            <ImageBackground source={require("../../assets/backgrounds/weather.jpg")} style={styles.img}>
                 <View style={styles.intermediate}>
                     <Header goBack={() => navigation.goBack()} />
                     <View style={styles.boxcontainer}>

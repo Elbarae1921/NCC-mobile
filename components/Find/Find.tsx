@@ -50,7 +50,7 @@ const Find: React.FC<FindProps> = ({ navigation }) => {
         return <AppLoading />
     else
         return (
-            <ImageBackground source={require('../../assets/find.jpg')} style={styles.background}>
+            <ImageBackground source={require('../../assets/backgrounds/find.jpg')} style={styles.background}>
                 <View style={styles.intermediate}>
                     <Header goBack={() => navigation.goBack()} />
                     <View style={styles.boxcontainer}>
