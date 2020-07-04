@@ -37,22 +37,6 @@ const Partner: React.FC<PartnerProps> = ({ navigation }) => {
         setLogin(oldState => !oldState);
     }
 
-    const updateEmail = (text: string) => {
-        setEmail(text);
-    }
-
-    const updateOrganization = (text: string) => {
-        setOrganization(text);
-    }
-
-    const updatePhone = (text: string) => {
-        setPhone(text);
-    }
-
-    const updatePassword = (text: string) => {
-        setPassword(text);
-    }
-
     const displayMessage = (key: string) => {
         setToken(`Here is your key : ${key}.\nPlease make sure to keep it safe and secret.`);
     }
@@ -92,9 +76,9 @@ const Partner: React.FC<PartnerProps> = ({ navigation }) => {
     }
 
     let form = login ? 
-                <Login onChangeEmail={updateEmail} onChangePassword={updatePassword} onSubmit={performLogin} /> 
+                <Login onChangeEmail={setEmail} onChangePassword={setPassword} onSubmit={performLogin} /> 
                 : 
-                <Register onChangeEmail={updateEmail} onChangeOrganization={updateOrganization} onChangePhoneNumber={updatePhone} onChangePassword={updatePassword} onSubmit={performRegister} />;
+                <Register onChangeEmail={setEmail} onChangeOrganization={setOrganization} onChangePhoneNumber={setPhone} onChangePassword={setPassword} onSubmit={performRegister} />;
 
     if(!fontsloaded)
         return <AppLoading />

@@ -1,4 +1,5 @@
-import { Person } from './PersonType'
+import { Person } from './PersonType';
+import { WeatherStatsParams } from './WeatherType';
 
 type RootStackParamList = {
     home: undefined;
@@ -7,6 +8,8 @@ type RootStackParamList = {
     partner: undefined;
     findresults: Person[];
     checkinconfirmation: Person;
+    weather: undefined;
+    weatherstats: WeatherStatsParams;
 }
 
 export default RootStackParamList;

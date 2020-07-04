@@ -30,18 +30,6 @@ const Find: React.FC<FindProps> = ({ navigation }) => {
     const [city, setCity] = useState("");
     const [error, setError] = useState("");
 
-    const updateFirstName = (text: string): void => {
-        setFirstName(text);
-    }
-
-    const updateFamilyName = (text: string): void => {
-        setFamilyName(text);
-    }
-
-    const updateCity = (text: string): void => {
-        setCity(text);
-    }
-
     const search = async () => {
         setError("");
 
@@ -55,7 +43,7 @@ const Find: React.FC<FindProps> = ({ navigation }) => {
         if(typeof response === "string")
             return setError(response);
 
-        return navigation.navigate("findresults", response as Person[]);
+        return navigation.navigate("findresults", response);
     }
 
     if(!fontsloaded)
@@ -70,13 +58,13 @@ const Find: React.FC<FindProps> = ({ navigation }) => {
                             <Text style={styles.title}>Who are you looking for?</Text>
                             <View style={styles.subcontainer}>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="Family Name..." onChangeText={updateFamilyName} textContentType="familyName"/>
+                                    <Input placeholder="Family Name..." onChangeText={setFamilyName} textContentType="familyName"/>
                                 </View>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="First Name..." onChangeText={updateFirstName} textContentType="givenName" />
+                                    <Input placeholder="First Name..." onChangeText={setFirstName} textContentType="givenName" />
                                 </View>
                                 <View style={styles.inputcontainer}>
-                                    <Input placeholder="City..." onChangeText={updateCity} textContentType="addressCity" />
+                                    <Input placeholder="City..." onChangeText={setCity} textContentType="addressCity" />
                                 </View>
                             </View>
                             <View style={styles.inputcontainer}>

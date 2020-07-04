@@ -9,13 +9,13 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 
 import RootStackParamList from '../../types/RootStackParamList';
-import { checkin } from '../../API';
+import { WeatherStatsParams } from '../../types/WeatherType';
+import { weather } from '../../API';
 
-import styles from './Checkin.styles';
-import { Person } from '../../types/PersonType';
+import styles from './Weather.styles';
 
 interface CheckinProps {
-    navigation: StackNavigationProp<RootStackParamList, "checkin">;
+    navigation: StackNavigationProp<RootStackParamList, "weather">;
 }
 
 const Checkin: React.FC<CheckinProps> = ({ navigation }) => {
@@ -25,47 +25,36 @@ const Checkin: React.FC<CheckinProps> = ({ navigation }) => {
     });
 
     const [spin, setSpin] = useState(false);
-    const [firstName, setFirstName] = useState("");
-    const [familyName, setFamilyName] = useState("");
     const [city, setCity] = useState("");
     const [error, setError] = useState("");
 
     const submit = async () => {
         setError("");
 
-        if(firstName.length < 2 || familyName.length < 2 || city.length < 2)
-            return setError("Please fill all the fields.");
+        if(!city)
+            return setError("Please provide a city.");
 
         setSpin(true);
-        const response = await checkin(firstName, familyName, city);
+        const response = await weather(city);
         setSpin(false);
 
         if(typeof response === "string")
             return setError(response);
 
-        return navigation.navigate("checkinconfirmation", response);
+        navigation.navigate("weatherstats", response);
     }
 
     if(!fontsloaded)
         return <AppLoading />
     else
         return (
-            <ImageBackground source={require("../../assets/checkin.jpg")} style={styles.img}>
+            <ImageBackground source={require("../../assets/weather.jpg")} style={styles.img}>
                 <View style={styles.intermediate}>
                     <Header goBack={() => navigation.goBack()} />
                     <View style={styles.boxcontainer}>
-                        <View style={styles.box}>                            
-                            <Text style={styles.title}>Please enter your information</Text>
-                            <View style={styles.subcontainer}>
-                                <View style={styles.inputcontainer}>
-                                    <Input placeholder="Family Name..." onChangeText={setFamilyName} textContentType="familyName"/>
-                                </View>
-                                <View style={styles.inputcontainer}>
-                                    <Input placeholder="First Name..." onChangeText={setFirstName} textContentType="givenName" />
-                                </View>
-                                <View style={styles.inputcontainer}>
-                                    <Input placeholder="City..." onChangeText={setCity} textContentType="addressCity" />
-                                </View>
+                        <View style={styles.box}>              
+                            <View style={styles.inputcontainer}>
+                                <Input placeholder="City" onChangeText={setCity} textContentType="familyName"/>
                             </View>
                             <View style={styles.inputcontainer}>
                                 <Button text="Submit" onPress={submit} />

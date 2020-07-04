@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { ImageBackground, View, Text, TouchableHighlight, ScrollView } from 'react-native';
 import { AppLoading } from 'expo';
 import { useFonts, Sen_400Regular } from '@expo-google-fonts/sen';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -33,9 +33,9 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
                             <View key={`panel_${index}`} style={{...styles.panel, borderBottomWidth: index>2 ? 0 : 2 }}>
                                 <ImageBackground source={p.uri} style={styles.img}>
                                     <View style={styles.intermediate}>
-                                        <TouchableOpacity onPress={() => navigation.navigate(p.to)} style={styles.btn}>
+                                        <TouchableHighlight underlayColor={"rgba(0, 0, 0, 0.7)"} onPress={() => navigation.navigate(p.to)} style={styles.btn}>
                                             <Text style={styles.btnText} >{p.title}</Text>
-                                        </TouchableOpacity>
+                                        </TouchableHighlight>
                                     </View>
                                 </ImageBackground>
                             </View>

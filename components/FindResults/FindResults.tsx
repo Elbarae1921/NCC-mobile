@@ -19,7 +19,7 @@ interface FindResultsProp {
     route: RouteProp<RootStackParamList, 'findresults'>;
 }
 
-const FindResults: React.FC<FindResultsProp> = ({ navigation, route }) => {
+const FindResults: React.FC<FindResultsProp> = ({ navigation, route: { params } }) => {
 
     let [fontsloaded] = useFonts({
         RobotoMono_700Bold,
@@ -35,10 +35,10 @@ const FindResults: React.FC<FindResultsProp> = ({ navigation, route }) => {
                 <View style={styles.intermediate}>
                     <Header goBack={() => navigation.goBack()} />
                     <View style={styles.boxcontainer}>
-                    <Text style={styles.title}>We found <Text style={styles.number}>{route.params.length}</Text> match(es)</Text>
+                    <Text style={styles.title}>We found <Text style={styles.number}>{params.length}</Text> match(es)</Text>
                         <ScrollView contentContainerStyle={styles.box}>                            
                             {
-                                route.params.map((person, index) => {
+                                params.map((person, index) => {
                                     return (
                                         <View key={`person_${index}`} style={styles.dashed}>
                                             <View style={styles.sep}>

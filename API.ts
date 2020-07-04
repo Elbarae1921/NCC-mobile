@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { Person } from "./types/PersonType";
+import { WeatherStatsParams } from './types/WeatherType';
 
 const API = "https://national-catastrophe-center.herokuapp.com/api";
 
@@ -56,5 +57,20 @@ export const partnerRegister = async (email: string, name: string, phone: string
         return { tokenOrError: data.key, isSuccessful: true };
     } catch(error) {
         return {tokenOrError: "Network/Server Error.", isSuccessful: false};
+    }
+}
+
+export const weather = async (city: string): Promise<string | WeatherStatsParams>  => {
+    try {
+        const request = await axios.get(`${API}/weather?city=${city}`);
+        const data = request.data;
+        if(data.errors) 
+            return data.errors[0].msg as string;
+        return {
+            request: data.data.request[0],
+            weather: data.data.weather.map((w: any) => {return {weatherCode: w.hourly[0].weatherCode, avgTemp: w.avgtempC, date: w.date}})
+        }
+    } catch(error) {
+        return "Network/Server Error.";
     }
 }
