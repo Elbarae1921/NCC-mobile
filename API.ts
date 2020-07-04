@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { Person } from "./types/PersonType";
 
-const API = "http://192.168.43.64:5000/api";
+const API = "https://national-catastrophe-center.herokuapp.com/api";
 
 interface LoginFeedback {
     tokenOrError: string;
