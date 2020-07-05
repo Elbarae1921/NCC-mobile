@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -15,11 +15,6 @@ import WeatherStats from './components/WeatherStats/WeatherStats';
 import RootStackParamList from './types/RootStackParamList';
 
 const App: React.FC = () => {
-    
-    useEffect(() => {
-        StatusBar.setBarStyle("light-content");
-        StatusBar.setBackgroundColor("black");
-    }, []);
 
 
     const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
@@ -27,7 +22,7 @@ const App: React.FC = () => {
     
     return (
         <View style={styles.container}>
-            <StatusBar />
+            <StatusBar barStyle="light-content" backgroundColor="black" />
             <NavigationContainer>
                 <Navigator initialRouteName="home" screenOptions={{ headerShown: false }} >
                     <Screen name="home" component={Home} />

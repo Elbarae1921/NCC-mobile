@@ -12,7 +12,6 @@ import RootStackParamList from '../../types/RootStackParamList';
 import { checkin } from '../../API';
 
 import styles from './Checkin.styles';
-import { Person } from '../../types/PersonType';
 
 interface CheckinProps {
     navigation: StackNavigationProp<RootStackParamList, "checkin">;

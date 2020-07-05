@@ -11,7 +11,6 @@ import Button from '../Button/Button';
 import styles from './Find.styles';
 
 import RootStackParamList from '../../types/RootStackParamList';
-import { Person } from '../../types/PersonType';
 import { find } from '../../API';
 
 interface FindProps {
