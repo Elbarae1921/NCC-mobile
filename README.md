@@ -4,7 +4,7 @@ a hybrid mobile app version of [NCC](https://github.com/Elbarae1921/NCC) made us
 ## Installation
 
 To run this project locally you can either install the React Native CLI and an android/ios emulator, or you can use the Expo wrapper. ([read more here](https://reactnative.dev/docs/environment-setup)).
-Then after configuring your environment (make sure it's a typescript workflow) and creating a project copy over the files to your project directory.
+Then after configuring your environment (make sure it's a typescript workflow) and creating a project, copy over the files to your project directory.
 
 ## Usage
 
